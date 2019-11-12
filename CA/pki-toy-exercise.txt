@@ -1,0 +1,12 @@
+1) 
+a)Enter the command used to generate the CA's private key. *:	openssl genrsa -aes256 -out private/root-ca.key 4096
+b) What's the running performance of this command on your machine? * :	Levou aproximadamente 7 a 15 segundos para gerar.
+c) Enter the command used to generate the self-signed CA certificate. * : openssl ca -selfsign -config root-ca.conf -extensions root_ca -in csr/root-ca.csr -notext -out certs/root-ca.crt
+
+2)
+a)Enter the command used to generate the user's private key. * :  openssl genrsa -aes256 -out private/marcel.mendes.at.exemplo.com.br.key 2048
+b) Enter the command used to generate a user's certificate request. * : openssl req -new -config sub-ca.conf -key private/marcel.mendes.at.exemplo.com.br.key -out csr/marcel.mendes.at.exemplo.com.br.csr
+c) Enter the command used to generate the certificate. * : openssl ca -config sub-ca.conf -extensions usr_cert -in csr/marcel.mendes.at.exemplo.com.br.csr -notext -out certs/marcel.mendes.at.exemplo.com.br.crt
+
+3)
+Enter the command used to validate the certificate. * : openssl verify -CAfile certs/ca-chain.crt certs/marcel.mendes.at.exemplo.com.br.crt
